@@ -16,6 +16,8 @@
     },
     "dependencies": {
         "@algorithmic-acid/plugin-voidvendor": "workspace:*",
+        "@algorithmic-acid/plugin-fl-studio": "workspace:*",
+        "@algorithmic-acid/plugin-void-memory": "workspace:*",
         "@elizaos/client-direct": "workspace:*",
         "@elizaos/core": "workspace:*",
         "@elizaos/plugin-bootstrap": "workspace:*",
