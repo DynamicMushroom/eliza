@@ -1199,6 +1199,14 @@ export class AgentRuntime implements IAgentRuntime {
                 }) : { summary: "" },
             });
             elizaLogger.success(`User ${userName} created successfully.`);
+        } else if (name && /^User[0-9a-f-]{8,}/i.test(account.name)) {
+            // Update ONLY if stored name is a UUID-pattern default (e.g. "Userb96b7e55-...")
+            const rawDb = (this.databaseAdapter as any).db;
+            if (rawDb && typeof rawDb.prepare === "function") {
+                rawDb.prepare("UPDATE accounts SET name = ?, username = ? WHERE id = ?")
+                    .run(name, userName || account.username, userId);
+                elizaLogger.log(`[VoidVendor] Updated account name for ${userId}: "${account.name}" → "${name}"`);
+            }
         }
     }
 
